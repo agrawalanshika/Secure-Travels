@@ -17,8 +17,8 @@ The project is built with a modern dark-themed UI and a Python Flask backend.
 - ⚡ Smooth Loading & Transition Animations
 
 <p align="center">
-  <img src="templates/main.png" width="50%">
-  <img src="templates/dashboard.png" width="50%">
+  <img src="templates/main.png" width="45%">
+  <img src="templates/dashboard.png" width="45%">
 </p>
 
 
