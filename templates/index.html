@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Travels - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+</head>
+<!-- Loader Modal -->
+<div id="loaderModal" class="modal">
+    <div class="modal-content" style="text-align:center;">
+        <div class="loading" style="margin:20px auto;"></div>
+        <p id="loaderText" style="margin-top:15px;">Please wait...</p>
+    </div>
+</div>
+
+<body>
+    <div class="container">
+    <div class="login-box fade-in" id="mainContainer">
+
+        <!-- Logo & Title (NO extra box) -->
+        <div class="logo">
+            <div class="car-icon">🚗</div>
+            <h1>Secure Travels</h1>
+            <p class="tagline">Your Journey, Our Priority</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <div class="register-link">
+            Don't have an account? <a href="/register">Register here</a>
+        </div>
+
+        <div id="message" class="message"></div>
+    </div>
+</div>
+
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+</body>
+</html>
