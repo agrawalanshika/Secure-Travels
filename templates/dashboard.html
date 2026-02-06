@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Travels - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+</head>
+
+<!-- Loader Modal -->
+<div id="loaderModal" class="modal">
+    <div class="modal-content" style="text-align:center;">
+        <div class="loading" style="margin:20px auto;"></div>
+        <p id="loaderText" style="margin-top:15px;">Please wait...</p>
+    </div>
+</div>
+
+<!-- Cancel Booking Confirmation Modal -->
+<div id="cancelModal" class="modal">
+    <div class="modal-content">
+        <h2 style="color:#f87171; margin-bottom:15px;">Cancel Booking</h2>
+        <p>Are you sure you want to cancel this booking?</p>
+
+        <div class="form-actions" style="margin-top:25px;">
+            <button class="btn btn-danger" onclick="confirmCancel()">Yes, Cancel</button>
+            <button class="btn btn-secondary" onclick="closeCancelModal()">No</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Loader Popup -->
+<div id="cancelLoader" class="modal" style="background: transparent;">
+    <div class="modal-content" style="max-width:420px; text-align:center;">
+        <div class="loading" style="margin:20px auto;"></div>
+        <p style="margin-top:15px; font-size:16px;">
+            Cancelling your booking, please wait...
+        </p>
+    </div>
+</div>
+
+
+
+<body class="dashboard-body">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="car-icon">🚗</span>
+                <span>Secure Travels</span>
+            </div>
+            <div class="nav-user">
+                <span>Welcome, <strong>{{ username }}</strong></span>
+                <button onclick="logout()" class="btn btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+   <div class="dashboard-container fade-in" id="mainContainer">
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('book')">Book a Car</button>
+            <button class="tab-button" onclick="showTab('bookings')">My Bookings</button>
+        </div>
+        
+        <div id="bookTab" class="tab-content active">
+            <div class="section">
+                <h2>Available Cars</h2>
+                <div id="carsList" class="cars-grid"></div>
+            </div>
+            
+            <div class="section" id="bookingSection" style="display: none;">
+                <h2>Complete Your Booking</h2>
+
+<!-- Selected Car Display -->
+<div class="selected-car-box">
+    <strong>Selected Car:</strong>
+    <span id="selectedCarName">None</span>
+</div>
+
+                <form id="bookingForm">
+                    <input type="hidden" id="selected_car_id" name="car_id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickup_date">Pickup Date</label>
+                            <input type="date" id="pickup_date" name="pickup_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pickup_time">Pickup Time</label>
+                            <input type="time" id="pickup_time" name="pickup_time" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="period">Period</label>
+                        <select id="period" name="period" required>
+    <option value="" disabled selected hidden>Select Period</option>
+    <option value="Morning">Morning</option>
+    <option value="Afternoon">Afternoon</option>
+    <option value="Evening">Evening</option>
+    <option value="Night">Night</option>
+</select>
+
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city_pick">Pickup City</label>
+                            <select id="city_pick" name="city_pick" required>
+                                <option value="">Select City</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Noida">Noida</option>
+                                <option value="Greater Noida">Greater Noida</option>
+                                <option value="Mathura">Mathura</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exact_pick">Exact Pickup Location</label>
+                            <input type="text" id="exact_pick" name="exact_pick" placeholder="e.g., Connaught Place" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city_drop">Drop City</label>
+                            <select id="city_drop" name="city_drop" required>
+                                <option value="">Select City</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Noida">Noida</option>
+                                <option value="Greater Noida">Greater Noida</option>
+                                <option value="Mathura">Mathura</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exact_drop">Exact Drop Location</label>
+                            <input type="text" id="exact_drop" name="exact_drop" placeholder="e.g., Railway Station" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="kilometers">Estimated Kilometers</label>
+                        <input type="number" id="kilometers" name="kilometers" min="1" step="0.1" placeholder="Enter kilometers" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" onclick="cancelBooking()" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="bookingsTab" class="tab-content">
+            <h2>My Bookings</h2>
+            <div id="bookingsList"></div>
+        </div>
+        
+        <div id="receiptModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeReceipt()">&times;</span>
+                <div id="receiptContent"></div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
