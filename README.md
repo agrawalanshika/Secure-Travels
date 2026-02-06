@@ -16,6 +16,9 @@ The project is built with a modern dark-themed UI and a Python Flask backend.
 - 📱 Responsive Design
 - ⚡ Smooth Loading & Transition Animations
 
+![Login Page](templates/main.png)
+![Dashboard Page](templates/dashboard.png)
+
 ---
 
 ## 🛠 Tech Stack
