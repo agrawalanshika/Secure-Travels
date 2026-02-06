@@ -62,6 +62,26 @@ git clone https://github.com/your-username/secure-travels.git
 cd secure-travels
 ```
 
+### 2️⃣ Create Virtual Environment
+```
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3️⃣ Install Dependencies
+```
+pip install -r requirements.txt
+```
+
+### 4️⃣ Run the Application
+```
+python app.py
+```
+
+### 5️⃣ Open in Browser
+```
+http://127.0.0.1:5000
+```
 ---
 
 ## 🔮 Future Enhancements
