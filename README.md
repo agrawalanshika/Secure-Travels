@@ -49,13 +49,8 @@ Secure-Travels/
 │ ├── index.html
 │ ├── register.html
 │ └── dashboard.html
-├── static/
-│ ├── css/style.css
-│ ├── js/script.js
-│ └── images/
-│ ├── logo.png
-│ ├── favicon.png
-│ └── login-bg.jpg
+│ ├── style.css
+│ ├── script.js
 └── README.md
 
 ---
