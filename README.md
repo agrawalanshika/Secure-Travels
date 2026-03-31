@@ -59,7 +59,7 @@ Secure-Travels/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-username/secure-travels.git
+git clone https://github.com/agrawalanshika/secure-travels.git
 cd secure-travels
 ```
 
